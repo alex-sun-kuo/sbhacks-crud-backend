@@ -29,9 +29,8 @@ module.exports = (app) => {
 
   app.get('/clean-site', async function(req, res) {
     console.log(req.params);
-    var lat = parseInt(req.params.latitude);
-    var lon = parseInt(req.params.longitude);
-    const query = datastore.createQuery('trash-site').filter('latitude', '=', lat).filter('longitude', '=', lon);
+    var id = req.params.id;
+    const query = datastore.createQuery('trash-site').filter('photo-id', '=', id)
     query.run(async function(err, entities, info) {
       entities.forEach(async function(entity) {
         entity['clean'] = true;
